@@ -1,0 +1,7 @@
+package: sitemanager
+output: client_gen.go
+generate:
+  client: true
+  models: true
+output-options:
+  skip-prune: true

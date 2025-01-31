@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: Site Manager API
+  version: "0.1"
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        data:
+          type: string
+        httpStatusCode:
+          type: integer
+        message:
+          type: string
+        traceId:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /ea/hosts:
+    summary: Retrieve a list of all hosts associated with the UI account making the API call.
+    get:
+      responses:
+        "200":
+          description: A JSON array of host objects.
+          content: {}
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
